@@ -1,0 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500&family=Roboto:wght@400;700&display=swap");
+@import url("./utils/buttons.css");
+/* @import url("./utils/bootstrap.css"); */
+
+:root {
+  --green-main: rgb(173, 250, 29);
+  --black-main: rgb(0, 0, 0);
+  --accent-main: #585858;
+  --heading-font: "Fira Mono", monospace;
+  --paraghraph-font: sans-serif;
+}
+
+.heading-font {
+  font-family: var(--heading-font);
+}
+
+.paraghraph-default-font {
+  font-family: var(--paraghraph-font);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.header-container {
+  height: 100vh;
+  width: 100%;
+  padding: 62px;
+  background-color: var(--black-main);
+}
+
+.content-wrapper {
+  height: 100%;
+  padding: 0 48px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+}
+
+.profile-title {
+  font-family: var(--heading-font);
+  font-weight: 400;
+  font-size: 3rem;
+  color: white;
+}
+
+.profile-introduce-container {
+  display: flex;
+  max-width: 600px;
+  width: 100%;
+  flex-direction: column;
+  gap: 30px;
+  color: white;
+}
+.mark_green {
+  color: var(--green-main);
+}
+
+.profile-short-introduce {
+  font-family: var(--paraghraph-font);
+  line-height: 20px;
+  font-size: 1rem;
+  color: var(--accent-main);
+}
+
+.relative-container {
+  position: relative;
+}
+
+.profile-image-elements {
+  z-index: -1;
+  left: 11px;
+  top: 11px;
+  position: absolute;
+  background-color: var(--green-main);
+  transition: all cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+  border-bottom-right-radius: 320px;
+  height: 600px;
+  width: 500px;
+}
+
+.profile-image-elements.with-images {
+  position: static !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("/assets/images/profiles-after-conver.jpg");
+  transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s;
+  filter: grayscale(1);
+  border-bottom-right-radius: 320px;
+  height: 600px;
+  width: 500px;
+}
+
+.profile-image-elements.with-images:hover {
+  cursor: pointer;
+  filter: none;
+}
+
+.main-container {
+  color: white;
+  padding: 62px;
+  background-color: var(--black-main);
+}
+
+.triangle-container {
+  display: flex;
+}
+
+.navbar-container {
+  font-family: sans-serif;
+  width: 100%;
+  padding: 2rem 8rem;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+}
+
+.navbar-menu {
+  display: flex;
+  justify-content: end;
+  gap: 2rem;
+}
+
+.navbar-menu a {
+  font-family: var(--heading-font);
+  opacity: 0;
+  color: var(--accent-main);
+  /* transition: all ease-in 300ms; */
+}
+
+.navbar-menu a:hover {
+  color: var(--green-main);
+}
+
+.animate-path {
+  opacity: 0;
+}
+
+div[data-inview-profile],
+*[data-inview-introduce],
+[data-inview-about] {
+  opacity: 0;
+}
+
+div[data-inview-profile="1"] {
+  transform: translateX(-120px);
+}
+
+div[data-inview-profile="2"] {
+  transform: translateX(-120px);
+}
+
+.sect-one-introduce {
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr; */
+  padding: 48px;
+}
+
+.about-me {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0 50px;
+}
+
+.accordion-button::after {
+  content: none;
+}
+
+.accordion-button {
+  background-color: #1e1e1e;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: none;
+}
+
+.accordion-button:is(.collapsed) {
+  box-shadow: none;
+  border: none;
+}
+
+.accordion-item {
+  border: none;
+  background-color: transparent;
+}
+
+.accordion-item:last-of-type .accordion-collapse {
+  border-radius: 0;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: #2e2e2e;
+  border-color: var(--green-main);
+  box-shadow: none;
+  color: white;
+}
+
+.accordion-body {
+  border: none;
+  background-color: var(--black-main);
+  color: white;
+}
+
+.me-soft-skills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.me-soft-skills-headings {
+  font-size: 1rem;
+}
+
+.glassmorp-card {
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(8px);
+  border-radius: 4px;
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+}
+
+/* .glassmorp-card:hover {
+  filter: blur(5px);
+} */

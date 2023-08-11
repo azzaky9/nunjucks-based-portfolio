@@ -1,0 +1,27 @@
+.btn {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  width: fit-content;
+  font-size: 0.92rem;
+  padding: 0.68rem 2rem;
+  outline: none;
+  filter: blur(1);
+  border-radius: 25px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgb(173, 250, 29, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.btn:hover {
+  box-shadow: 0 8px 32px 0 rgb(173, 250, 29, 0.25);
+}
+
+.btn svg {
+  width: fit-content;
+}
