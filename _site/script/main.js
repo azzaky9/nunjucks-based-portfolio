@@ -9,8 +9,13 @@ const certificateContainer = document.querySelector(".certification-container");
 const btnCertificate = document.querySelectorAll("[data-animate-btn]");
 const openingCContainer = document.querySelector(".opening-certification");
 const projectPreviewEl = document.querySelector("[data-animate-projects]");
+const notifiedEl = document.querySelector(".modal-notified-status");
 
-console.log(projectPreviewEl);
+(function () {
+  emailjs.init("WfFBgLOtkh49APsGi");
+})();
+
+console.log();
 
 VANTA.WAVES({
   el: headerContainer,
@@ -155,10 +160,62 @@ observreAndAnimate(aboutElements, "SHORT_INTRODUCE", true);
 observreAndAnimate(elements, "NAVBAR_MENU", false);
 observreAndAnimate(certificateContainer, "NAVBAR_MENU", true);
 observreAndAnimate(openingCContainer, "NAVBAR_MENU", true);
-
-// observreAndAnimate(aboutElements, "PROFILE_INVIEW");
 choosingOptionAnimate("PROFILE_INVIEW", profileEl);
 choosingOptionAnimate("SHORT_INTRODUCE", shrtIntroEl);
 choosingOptionAnimate("NAVBAR_MENU", navbarMenu);
 
 observreAndAnimateWithClass(projectPreviewEl, "NAVBAR_MENU", ".p");
+
+const formEl = document.getElementById("form-sender");
+
+observreAndAnimateWithClass(formEl, "NAVBAR_MENU", "[data-animate-input]");
+
+const mappingStatus = {
+  success: {
+    message: "Email completely sent",
+    iconClass: "bi bi-check-all"
+  },
+  failed: {
+    message: "Failed to sent",
+    iconClass: "bi-x-circle-fill"
+  }
+};
+
+const createStatusmsg = (status) => {
+  const elements = `
+    <i class='${mappingStatus[status].iconClass}'></i>
+    <h5>${mappingStatus[status].message}</h5>
+  `;
+
+  return elements;
+};
+
+formEl.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const serviceId = "service_4a2j5tg";
+  const templateId = "template_3epwcup";
+
+  emailjs
+    .sendForm(serviceId, templateId, this)
+    .then(() => {
+      notifiedEl.children[0].innerHTML = createStatusmsg("success");
+
+      anime({
+        targets: notifiedEl,
+        right: 0,
+        endDelay: 1000,
+        direction: "alternate"
+      });
+    })
+    .catch((err) => {
+      notifiedEl.children[0].innerHTML = createStatusmsg("failed");
+
+      anime({
+        targets: notifiedEl,
+        right: 0,
+        endDelay: 1000,
+        direction: "alternate"
+      });
+    });
+});

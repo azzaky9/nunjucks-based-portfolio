@@ -2,12 +2,10 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPassthroughCopy("assets/");
   eleventyConfig.addPassthroughCopy("styles/global-style.css");
   eleventyConfig.addPassthroughCopy("styles/utils/buttons.css");
+  eleventyConfig.addPassthroughCopy("styles/utils/media-query.css");
   eleventyConfig.addPassthroughCopy("script/main.js");
   eleventyConfig.addPassthroughCopy({
-    "node_modules/animejs/lib/anime.js": "script/anime.js",
-    "node_modules/bootstrap/dist/js/bootstrap.min.js": "script/bootstrap.js",
-    "node_modules/bootstrap/dist/css/bootstrap.min.css":
-      "styles/utils/bootstrap.css"
+    "node_modules/animejs/lib/anime.js": "script/anime.js"
   });
 
   eleventyConfig.addCollection("datas", (collection) => {

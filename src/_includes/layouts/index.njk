@@ -9,16 +9,26 @@
       rel="stylesheet"
       type="text/css"
       href="/styles/global-style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
 
     <title>{{ title }}</title>
   </head>
   <body>
+    <div class="modal-notified-status glassmorp-card">
+      <div class="modal-content">
+       
+      </div>
+    </div>
 
-    {% include "body-templates/navbar.njk" %}
+    {% include "body-templates/navbar.njk" %} 
 
     {% include "body-templates/header.njk" %}
 
-    {% include "body-templates/about.njk" %}
+    {% include "body-templates/about.njk" %} 
+
+    {% include "body-templates/conversation.njk" %} 
 
     {% include "script-templates/script.njk" %}
   </body>
