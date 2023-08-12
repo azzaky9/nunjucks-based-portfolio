@@ -4,11 +4,13 @@ const profileEl = document.querySelectorAll("[data-inview-profile]");
 const shrtIntroEl = document.querySelectorAll("[data-inview-introduce]");
 const navbarMenu = document.querySelectorAll("[data-menu-animate]");
 const svgInfiniteLine = document.querySelector("[data-animate-path]");
-const aboutElements = document.querySelector(".about-me");
-const buttonAccord = document.querySelectorAll(".accordion-button");
-const blurredEl = document.querySelectorAll(".me-soft-skills-item");
+const aboutElements = document.querySelector(".inner-about-me");
+const certificateContainer = document.querySelector(".certification-container");
+const btnCertificate = document.querySelectorAll("[data-animate-btn]");
+const openingCContainer = document.querySelector(".opening-certification");
+const projectPreviewEl = document.querySelector("[data-animate-projects]");
 
-console.log(blurredEl);
+console.log(projectPreviewEl);
 
 VANTA.WAVES({
   el: headerContainer,
@@ -22,49 +24,42 @@ VANTA.WAVES({
   color: 0x1
 });
 
-// buttonAccord.forEach((btn) => {
-//   btn.addEventListener("click", (e) => {
-//     let expans = btn.getAttribute("aria-expanded");
-//     let isExpans = expans === "true" ? true : false;
+const elements = document.querySelectorAll(".me-soft-skills-item");
 
-//     buttonAccord.forEach((bb) => {
-//       let t = bb.getAttribute("aria-expanded") === "true" ? true : false;
-//       if (!t) anime({ targets: bb.children[0], rotate: 0 });
-//     });
+elements.forEach((element) => {
+  element.addEventListener("mouseover", () => {
+    elements.forEach((el) => {
+      el !== element ? el.classList.add("blur") : el.classList.add("scale");
+    });
+  });
 
-//     return isExpans
-//       ? anime({
-//           targets: btn.children[0],
-//           rotate: 45
-//         })
-//       : anime({
-//           targets: btn.children[0],
-//           rotate: 0
-//         });
-//   });
-// });
+  element.addEventListener("mouseout", () => {
+    elements.forEach((el) => {
+      return el !== element
+        ? el.classList.remove("blur")
+        : el.classList.remove("scale");
+    });
+  });
+});
 
 // animte all button on the entire pages
 function hoverButtonEl(element) {
   element.addEventListener("mouseover", (e) => {
     anime({
-      targets: element,
-      filter: "blur(5px)"
+      targets: element.children[1],
+      rotate: 90
     });
   });
 
   element.addEventListener("mouseleave", (e) => {
-    console.log("out");
     anime({
-      targets: element,
-      filter: "blur(0)"
+      targets: element.children[1],
+      rotate: 0
     });
   });
 }
 
-blurredEl.forEach((blr) => {
-  hoverButtonEl(blr);
-});
+hoverButtonEl(btnAnimate);
 
 // observe and animate
 
@@ -73,9 +68,7 @@ function choosingOptionAnimate(animateModel, el) {
     targets: el,
     opacity: 1,
     easing: "easeInOutQuad",
-    delay: function (el, i, l) {
-      return i * 200;
-    }
+    delay: anime.stagger(200)
   };
 
   const hashAnimateOption = {
@@ -83,10 +76,9 @@ function choosingOptionAnimate(animateModel, el) {
     SHORT_INTRODUCE: { ...defaultOption, translateY: -30 },
     NAVBAR_MENU: {
       ...defaultOption,
+      opacity: 1,
       translateY: 10,
-      delay: function (el, i, l) {
-        return i * 300;
-      }
+      delay: anime.stagger(200)
     },
     SVG_TIMELINE: {
       ...defaultOption,
@@ -103,14 +95,12 @@ function choosingOptionAnimate(animateModel, el) {
   return anime(option);
 }
 
-function observreAndAnimate(elements, animateModel, shouldAnimateChildren) {
+function observreAndAnimateWithClass(elements, animateModel, className) {
   const observer = new IntersectionObserver(
     (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          shouldAnimateChildren
-            ? choosingOptionAnimate(animateModel, entry.target.children)
-            : choosingOptionAnimate(animateModel, entry);
+          choosingOptionAnimate(animateModel, className);
           observer.unobserve(entry.target);
         }
       });
@@ -125,10 +115,50 @@ function observreAndAnimate(elements, animateModel, shouldAnimateChildren) {
   observer.observe(elements);
 }
 
+function observreAndAnimate(elements, animateModel, shouldAnimateChildren) {
+  const observer = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (elements.length) {
+            return choosingOptionAnimate(animateModel, elements);
+          }
+
+          if (shouldAnimateChildren) {
+            choosingOptionAnimate(animateModel, entry.target.children);
+          } else {
+            choosingOptionAnimate(animateModel, entry);
+          }
+
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      root: null,
+      rootMargin: "0px",
+      threshold: 1.0
+    }
+  );
+
+  if (elements.length) {
+    elements.forEach((el) => {
+      observer.observe(el);
+    });
+  } else {
+    observer.observe(elements);
+  }
+}
+
 observreAndAnimate(svgInfiniteLine, "SVG_TIMELINE", false);
 observreAndAnimate(aboutElements, "SHORT_INTRODUCE", true);
+observreAndAnimate(elements, "NAVBAR_MENU", false);
+observreAndAnimate(certificateContainer, "NAVBAR_MENU", true);
+observreAndAnimate(openingCContainer, "NAVBAR_MENU", true);
 
 // observreAndAnimate(aboutElements, "PROFILE_INVIEW");
 choosingOptionAnimate("PROFILE_INVIEW", profileEl);
 choosingOptionAnimate("SHORT_INTRODUCE", shrtIntroEl);
 choosingOptionAnimate("NAVBAR_MENU", navbarMenu);
+
+observreAndAnimateWithClass(projectPreviewEl, "NAVBAR_MENU", ".p");

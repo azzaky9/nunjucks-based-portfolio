@@ -20,8 +20,14 @@
 
 .btn:hover {
   box-shadow: 0 8px 32px 0 rgb(173, 250, 29, 0.25);
+  background-color: #000;
 }
 
 .btn svg {
   width: fit-content;
+}
+
+.btn-square {
+  width: 40% !important;
+  border-radius: 4px !important;
 }

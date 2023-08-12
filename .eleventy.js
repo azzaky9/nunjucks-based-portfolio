@@ -10,7 +10,9 @@ module.exports = (eleventyConfig) => {
       "styles/utils/bootstrap.css"
   });
 
-  eleventyConfig.addLayoutAlias("default", "src/_includes/layouts/index.njk");
+  eleventyConfig.addCollection("datas", (collection) => {
+    return collection.getFilteredByGlob("_data/data.json");
+  });
 
   return {
     dir: {

@@ -1,0 +1,53 @@
+<section class="sect-three-projects relative-container">
+  <h2 class="project-heading"
+    >Let's Showcase my Project<span class="mark_green">_</span></h2
+  >
+  <div
+    class="project-container-outer"
+    data-animate-projects>
+    <div class="project-container glassmorp-card">
+      <div class="image-project blogs-app"></div>
+      <article class="project-info">
+        <h3>Our-connected Blog Apps</h3>
+        <p
+          >This Blog App is a dynamic fusion of blogging and social interaction.
+          Sign up effortlessly, express yourself, and engage with a global
+          community. Customize your profile picture and connect through 'loving'
+          posts from diverse users. Join us now to redefine how you share and
+          connect through the art of blogging.</p
+        >
+        <a
+          href="https://our-connected.vercel.app/"
+          target="_blank">
+          <button class="btn btn-square">Visit</button>
+        </a>
+      </article>
+    </div>
+    <div class="project-container glassmorp-card">
+      <div class="image-project movies-app"></div>
+      <article class="project-info">
+        <h3>Watchyu Movies App with TMDB Api</h3>
+        <p
+          >This website, WatchYu, redefines your movie-watching experience by
+          offering an innovative platform to curate your very own watchlist.
+          Through seamless authentication, you gain access to a world of
+          detailed movie information. Uncover insights about production, explore
+          trailers, and even discover similar films that align with your taste.
+          Elevate your cinematic journey with WatchYu, where every movie moment
+          is just a click away.</p
+        >
+        <a
+          href="https://movies-app-tmdbapi.vercel.app/"
+          target="_blank">
+          <button class="btn btn-square">Visit</button>
+        </a>
+      </article>
+    </div>
+    {% for logo in logostack %}
+    <img
+      class="p"
+      src="{{ logo.url }}"
+      alt="" />
+    {% endfor %}
+  </div>
+</section>

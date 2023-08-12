@@ -1,0 +1,26 @@
+<section class="sect-two-certification">
+  <div class="opening-certification">
+    <h2 class="certification-heading zero-opacity"
+      >What's about my certification<span class="mark_green">?</span></h2
+    >
+    <p class="certification-opening-text zero-opacity"
+      >Ever wondered about my certification journey? Well, I've been hard at
+      work completing various courses to earn certificates. These certificates
+      showcase my dedication and passion for web development. Stay tuned as I
+      walk you through my certification experience and the skills I've gained
+      along the way.</p
+    >
+  </div>
+  <div class="certification-container">
+    {% for d in data %}
+    <a
+      href="{{ d.links }}"
+      target="_blank"
+      data-animate-btn>
+      <button class="btn"
+        >{{ d.name }}<span class="mark_green">{{ d.year }}</span></button
+      >
+    </a>
+    {% endfor %}
+  </div>
+</section>
