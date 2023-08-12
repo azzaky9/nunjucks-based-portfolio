@@ -15,8 +15,6 @@ const notifiedEl = document.querySelector(".modal-notified-status");
   emailjs.init("WfFBgLOtkh49APsGi");
 })();
 
-console.log();
-
 VANTA.WAVES({
   el: headerContainer,
   mouseControls: true,
@@ -155,14 +153,27 @@ function observreAndAnimate(elements, animateModel, shouldAnimateChildren) {
   }
 }
 
-observreAndAnimate(svgInfiniteLine, "SVG_TIMELINE", false);
-observreAndAnimate(aboutElements, "SHORT_INTRODUCE", true);
-observreAndAnimate(elements, "NAVBAR_MENU", false);
-observreAndAnimate(certificateContainer, "NAVBAR_MENU", true);
-observreAndAnimate(openingCContainer, "NAVBAR_MENU", true);
-choosingOptionAnimate("PROFILE_INVIEW", profileEl);
-choosingOptionAnimate("SHORT_INTRODUCE", shrtIntroEl);
-choosingOptionAnimate("NAVBAR_MENU", navbarMenu);
+const x = [
+  [svgInfiniteLine, "SVG_TIMELINE", false],
+  [aboutElements, "SHORT_INTRODUCE", true],
+  [elements, "NAVBAR_MENU", false],
+  [openingCContainer, "NAVBAR_MENU", true],
+  [certificateContainer, "NAVBAR_MENU", true]
+];
+
+x.forEach((k) => {
+  observreAndAnimate(k[0], k[1], k[2]);
+});
+
+const p = [
+  ["PROFILE_INVIEW", profileEl],
+  ["SHORT_INTRODUCE", shrtIntroEl],
+  ["NAVBAR_MENU", navbarMenu]
+];
+
+p.forEach((t) => {
+  choosingOptionAnimate(t[0], t[1], t[2]);
+});
 
 observreAndAnimateWithClass(projectPreviewEl, "NAVBAR_MENU", ".p");
 
