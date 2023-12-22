@@ -1,4 +1,4 @@
-# Welcome to [Your Project Name]! ⭐
+# I Recommend you read this docs before clone! ⭐
 
 Thank you for checking out this repository! Your stars help support this project tremendously.
 
